@@ -81,6 +81,10 @@ namespace PracticeWebApi.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var singleproduct = await _context.Products.FindAsync(id);
+            if(singleproduct == null)
+            {
+                return NotFound();
+            }
             var product = _mapper.Map<Product>(singleproduct);
 
             _context.Products.Remove(product);
